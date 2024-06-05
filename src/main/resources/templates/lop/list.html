@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách lớp</title>
+    <th:block th:replace="layout::link-css"></th:block>
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+    <h2>Danh sách lớp</h2>
+    <div id="abc">
+        <a class="btn btn-primary" href="/lop/add">Thêm mới</a>
+        <div class = "search">
+            <form id="search-box" th:action="@{/lop/timkiem}" th:object="${dsLop}">
+                <button id="search-btn"><img src="https://tse2.mm.bing.net/th?id=OIP.xzPEY661ToNuT_i1huu5CwHaHa&pid=Api&P=0&h=220" width="30px" /></button>
+                <input name="tukhoa" class="search-text" type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required />
+            </form>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Mã lớp</th>
+            <th>Tên lớp</th>
+            <th style="padding-left:350px">Chức năng</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lop : ${dsLop}">
+            <td th:text="${lop.maLop}"></td>
+            <td th:text="${lop.tenLop}"></td>
+            <td>
+                <a th:href="@{/lop/edit/{id}(id=${lop.maLop})}" class="btn btn-warning" style="margin-left:280px">Sửa</a>
+                <a th:href="@{/lop/delete/{id}(id=${lop.maLop})}" onclick="return confirm ('Bạn có muốn xoá?')" class="btn btn-danger"style="margin-left:20px">Xoá</a>
+                <a class="btn btn-dark" th:href="@{/sinhvien/dsSv/{id}(id=${lop.maLop})}"style="margin-left:20px">Chi Tiết </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>
+
